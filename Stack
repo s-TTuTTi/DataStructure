@@ -1,1 +1,68 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <malloc.h>
+#define _CRT_SECURE_NO_WARNINGS 
+#pragma warnings(disable: 4996)
+#define MAX_SIZE 101
+
+//연결리스트로 스택 만들기 !
+
+
+int A[MAX_SIZE];
+void Push(int x);
+void Pop();
+void Print();
+int Top();
+int IsEmpty();
+
+struct Node_ {
+    int data;
+    struct Node_* ptr;
+};
+typedef struct Node_ Node;
+
+
+Node* top;
+
+int main() {
+    top = NULL;
+    Push(1); Print();
+    Push(5); Print();
+    Push(10); Print();
+    if (!IsEmpty()) {
+        printf("Pop!\n");
+        Pop(); Print();
+
+    }
+    Push(12); Print();
+    printf("%d\n", Top());
+}
+
+void Push(int x) {
+    Node* tmp = (Node*)malloc(sizeof(Node));
+    tmp->data = x;
+    tmp->ptr = top;
+    top = tmp;
+}
+
+void Pop() {
+    Node* tmp = top;
+    if (top == NULL)return;
+    tmp - top;
+    top = top->ptr;
+    free(tmp);
+}
+void Print() {
+    Node* tmp;
+    printf("Stack: ");
+    for (tmp = top;tmp != NULL;tmp = tmp->ptr)
+        printf("%d", tmp->data);
+    printf("\n");
+}
+int Top() {
+    return top->data;
+}
+int IsEmpty() {
+    return (top == NULL ? 1 : 0);
+}
 
